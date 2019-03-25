@@ -22,8 +22,11 @@
      <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.4.5/dist/css/skins/_all-skins.min.css'); ?>">
     <!-- Date Picker -->
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.4.5/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css'); ?>">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css'); ?>"> -->
 
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>">
+    <!-- select2 -->
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/css/select2.min.css">
     
 <!-- Content Wrapper. Contains page content -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -71,26 +74,38 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="<?php if($page == "dashboard/index"){echo "active";} ?>">
-              <a href="dashboard">
+              <a href="<?php echo base_url('dashboard') ?>">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
               </a>
             </li>
 
             <li class="<?php if($page == 'user/user_list'){echo 'active';} ?>">
-              <a href="User">
+              <a href="<?php echo base_url('User') ?>">
                 <i class="fa fa-user"></i> <span>User</span>
               </a>
             </li> 
 
             <li class="<?php if($page == 'product/product_list'){echo 'active';} ?>">
-              <a href="product">
-                <i class="fa fa-file"></i> <span>Barang</span>
+              <a href="<?php echo base_url('product') ?>">
+                <i class="fa fa-cubes"></i> <span>Barang</span>
               </a>
             </li> 
 
             <li class="<?php if($page == 'customer/customer_list'){echo 'active';} ?>">
-              <a href="customer">
-                <i class="fa fa-file"></i> <span>Order</span>
+              <a href="<?php echo base_url('customer') ?>">
+                <i class="fa fa-list-ol"></i> <span>Order</span>
+              </a>
+            </li> 
+
+            <li class="<?php if($page == 'packing/packing_list'){echo 'active';} ?>">
+              <a href="<?php echo base_url('packing') ?>">
+                <i class="fa fa-suitcase"></i> <span>Jenis Packing</span>
+              </a>
+            </li> 
+
+            <li class="<?php if($page == 'status/status_list'){echo 'active';} ?>">
+              <a href="<?php echo base_url('status') ?>">
+                <i class="fa fa-truck"></i> <span>Status</span>
               </a>
             </li> 
 
@@ -177,6 +192,7 @@
     <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.5/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <!-- datepicker -->
     <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.5/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script> -->
     <!-- AdminLTE App -->
     <script src="<?php echo base_url(); ?>assets/js/app.min.js"></script>
      <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.5/dist/js/adminlte.min.js"></script> 
@@ -184,7 +200,14 @@
      <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.5/dist/js/pages/dashboard.js"></script> 
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.5/dist/js/demo.js"></script> 
-
+    <!-- select2 -->
+    <script src="<?php echo base_url() ?>assets/select2/js/select2.full.min.js"></script>
+    <script>
+            $(function () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+            });
+        </script>
 
     
 

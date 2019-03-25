@@ -93,8 +93,32 @@
                             <div class="form-group">
                                 <label for="varchar">Barang</label>
                                 <select multiple class="form-control select2" name="product_tags[]" multiple="multiple" data-placeholder="Select a State" id="p_list_products">
-                                    <option value="0">Sendal</option>
-                                    <option value="1">Sepatu</option>
+                                    <!-- <option value="0">Sendal</option>
+                                    <option value="1">Sepatu</option> -->
+                                    <?php
+
+                                        $active = '';
+                                        $total = count($product);
+
+                                        $selected = '';
+                                        // Looping All Tags
+                                        for ($i=0; $i < $total ; $i++):
+                                            // Looping Post_tag jika ada
+                                            $p = explode(',', $p_list_products);
+
+                                            foreach ($p as $bt){
+                                                $active = $bt;
+
+                                                if($active == $product[$i]['p_id']){
+                                                    $selected = ' selected=selected';
+                                                    break;
+                                                }else{
+                                                    $selected = '';
+                                                }
+                                            }
+                                    ?>
+                                        <option value="<?php echo $product[$i]['p_id'];?>" <?php echo $selected ?> ><?php echo $product[$i]['p_name'];?></option>
+                                    <?php endfor; ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -104,9 +128,14 @@
                             <div class="form-group">
                                 <label for="int"> Jenis Packing</label>
                                 <select class="form-control" name="dt_packing" id="dt_packing">
-                                    <option value="0" <?php if($dt_packing == 0 ) echo 'selected="selected"'; ?>> Dus </option>
+                                    <!-- <option value="0" <?php if($dt_packing == 0 ) echo 'selected="selected"'; ?>> Dus </option>
                                     <option value="1" <?php if($dt_packing == 1 ) echo 'selected="selected"'; ?>> Koper </option>
-                                    <option value="2" <?php if($dt_packing == 1 ) echo 'selected="selected"'; ?>> Storage Box </option>
+                                    <option value="2" <?php if($dt_packing == 1 ) echo 'selected="selected"'; ?>> Storage Box </option> -->
+                                    <?php
+                                        foreach ($packing as $p):
+                                    ?>
+                                        <option value="<?php echo $p->pk_id;?>" <?php if($dt_packing==$p->pk_id) echo 'selected="selected"'; ?> ><?php echo $p->pk_name;?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -135,10 +164,11 @@
                             <div class="form-group">
                                 <label for="int">Status</label>
                                 <select class="form-control" name="t_status" id="t_status">
-                                    <option value="0" <?php if($t_status == 0 ) echo 'selected="selected"'; ?>> Dalam Proses Packing </option>
-                                    <option value="1" <?php if($t_status == 1 ) echo 'selected="selected"'; ?>> Dikirim </option>
-                                    <option value="2" <?php if($t_status == 2 ) echo 'selected="selected"'; ?>> Transit </option>
-                                    <option value="2" <?php if($t_status == 2 ) echo 'selected="selected"'; ?>> Diterima </option>
+                                    <?php
+                                        foreach ($status as $s):
+                                    ?>
+                                        <option value="<?php echo $s->s_id;?>" <?php if($t_status==$s->s_id) echo 'selected="selected"'; ?> ><?php echo $s->s_name;?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -149,7 +179,6 @@
                             <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
                             <a href="<?php echo site_url('customer') ?>" class="btn btn-default">Cancel</a>
                         </form>
-                        
                     </div> <!-- box-body -->
                 </div> <!-- box-info -->
             </section><!-- content -->

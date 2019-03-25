@@ -9,6 +9,9 @@ class Customer extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Customer_model');
+        $this->load->model('Product_model');
+        $this->load->model('Packing_model');
+        $this->load->model('Status_model');
         $this->load->library('form_validation');        
 	$this->load->library('datatables');
     }
@@ -73,6 +76,9 @@ class Customer extends CI_Controller
 	    't_date_reception' => set_value('t_date_reception'),
 	    't_status' => set_value('t_status'),
 	    't_desc' => set_value('t_desc'),
+	    'product' => $this->Product_model->get_products(),
+	    'packing' => $this->Packing_model->get_all(),
+	    'status' => $this->Status_model->get_all(),
         'page' => 'customer/customer_form',
 	);
         $this->load->view('dashboard/dashboard', $data);
@@ -85,6 +91,13 @@ class Customer extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+            $product_tags = $this->input->post('product_tags');
+            $pt = '';
+            foreach ($product_tags as $product) {
+                $br = $br.$product.",";
+                
+            }
+
             $data = array(
 		'c_name_sender' => $this->input->post('c_name_sender',TRUE),
 		'c_address_sender' => $this->input->post('c_address_sender',TRUE),
@@ -132,6 +145,7 @@ class Customer extends CI_Controller
 		't_date_reception' => set_value('t_date_reception', $row->t_date_reception),
 		't_status' => set_value('t_status', $row->t_status),
 		't_desc' => set_value('t_desc', $row->t_desc),
+	    'product' => $this->Product_model->get_products(),
         'page' => 'customer/customer_form',
 	    );
             $this->load->view('dashboard/dashboard', $data);
@@ -183,16 +197,16 @@ class Customer extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('c_name_sender', 'c name sender', 'trim|required');
-	$this->form_validation->set_rules('c_address_sender', 'c address sender', 'trim|required');
-	$this->form_validation->set_rules('c_city_sender', 'c city sender', 'trim|required');
-	$this->form_validation->set_rules('c_postcode_sender', 'c postcode sender', 'trim|required');
-	$this->form_validation->set_rules('c_phone_sender', 'c phone sender', 'trim|required');
-	$this->form_validation->set_rules('c_name_receiver', 'c name receiver', 'trim|required');
-	$this->form_validation->set_rules('c_address_receiver', 'c address receiver', 'trim|required');
-	$this->form_validation->set_rules('c_city_receiver', 'c city receiver', 'trim|required');
-	$this->form_validation->set_rules('c_postcode_receiver', 'c postcode receiver', 'trim|required');
-	$this->form_validation->set_rules('c_phone_receiver', 'c phone receiver', 'trim|required');
+	$this->form_validation->set_rules('c_name_sender', 'nama', 'trim|required');
+	$this->form_validation->set_rules('c_address_sender', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('c_city_sender', 'kota', 'trim|required');
+	$this->form_validation->set_rules('c_postcode_sender', 'kode pos', 'trim|required');
+	$this->form_validation->set_rules('c_phone_sender', 'telepon', 'trim|required');
+	$this->form_validation->set_rules('c_name_receiver', 'nama', 'trim|required');
+	$this->form_validation->set_rules('c_address_receiver', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('c_city_receiver', 'kota', 'trim|required');
+	$this->form_validation->set_rules('c_postcode_receiver', 'kode pos', 'trim|required');
+	$this->form_validation->set_rules('c_phone_receiver', 'telepon', 'trim|required');
 
 	$this->form_validation->set_rules('c_id', 'c_id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
