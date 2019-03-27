@@ -162,6 +162,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="varchar">Total Harga </label>
+                                <input type="text" class="form-control" name="dt_total_price" id="dt_total_price" placeholder="Harga" value="<?php echo $dt_total_price; ?>" />
+                            </div>
+                            <div class="form-group">
                                 <label for="int">Status</label>
                                 <select class="form-control" name="t_status" id="t_status">
                                     <?php

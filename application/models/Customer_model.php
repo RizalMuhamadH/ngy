@@ -17,7 +17,7 @@ class Customer_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_packing,desc_transaction.dt_desc');
+        $this->datatables->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price ');
         $this->datatables->from('customer');
         //add this line for join
         $this->datatables->join('transaction', 'customer.c_id = transaction.c_id');
@@ -79,6 +79,7 @@ class Customer_model extends CI_Model
     function insert($data)
     {
         $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
     }
 
     // update data
