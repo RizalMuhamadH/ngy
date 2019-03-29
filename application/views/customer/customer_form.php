@@ -104,7 +104,7 @@
                                         // Looping All Tags
                                         for ($i=0; $i < $total ; $i++):
                                             // Looping Post_tag jika ada
-                                            $p = explode(',', $p_list_products);
+                                            $p = explode(',', $dt_list_products);
 
                                             foreach ($p as $bt){
                                                 $active = $bt;
@@ -117,7 +117,7 @@
                                                 }
                                             }
                                     ?>
-                                        <option value="<?php echo $product[$i]['p_id'];?>" <?php echo $selected ?> ><?php echo $product[$i]['p_name'];?></option>
+                                        <option value="<?php echo $product[$i]['p_id']; ?>" <?php echo $selected ?> ><?php echo $product[$i]['p_name'];?></option>
                                     <?php endfor; ?>
                                 </select>
                             </div>
@@ -180,6 +180,8 @@
                                 <textarea class="form-control" rows="5" name="t_desc" id="t_desc" placeholder="Deskripsi"><?php echo $t_desc; ?></textarea>
                             </div>
                             <input type="hidden" name="c_id" value="<?php echo $c_id; ?>" /> 
+                            <input type="hidden" name="dt_id" value="<?php echo $dt_id; ?>" /> 
+                            <input type="hidden" name="t_id" value="<?php echo $t_id; ?>" /> 
                             <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
                             <a href="<?php echo site_url('customer') ?>" class="btn btn-default">Cancel</a>
                         </form>

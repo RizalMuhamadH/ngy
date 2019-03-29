@@ -54,9 +54,6 @@
                     
                         <table class="table table-bordered table-striped" id="mytable">
                         <div class="text-center">
-                            <div style="margin-top: 4px"  id="message">
-                                <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                            </div>
                         </div>
                         <thead>
                             <tr>
@@ -67,6 +64,14 @@
                         </thead>
                         
                         </table>
+                        <div style="margin-top: 4px"  id="message">
+                            <?php if($this->session->userdata('message') <> ''){ ?>
+                                <div class="alert alert-success" role="alert">
+                                    <?php echo $this->session->userdata('message'); ?>
+                                </div>
+                            <?php } ?>
+                            
+                            </div>
                         
                         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script>
                         <script type="text/javascript">

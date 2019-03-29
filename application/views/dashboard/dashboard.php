@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>">
     <!-- select2 -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/css/select2.min.css">
+
+    <!-- UIkit -->
+    <!-- <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/uikit.min.css"> -->
     
 <!-- Content Wrapper. Contains page content -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -59,7 +62,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Selamat Datang, <?php echo $this->session->userdata('session_username'); ?> <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                  <!-- <li><a href="index.php/web/login/logout">Logout</a></li> -->
+                  <li><a href="<?php echo site_url('user/logout') ?>">Logout</a></li>
                 </ul>
               </li>              
             </ul>
@@ -202,6 +205,8 @@
     <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.5/dist/js/demo.js"></script> 
     <!-- select2 -->
     <script src="<?php echo base_url() ?>assets/select2/js/select2.full.min.js"></script>
+    <!-- UIkit -->
+    <!-- <script src="<?php echo base_url() ?>assets/js/uikit.js"></script> -->
     <script>
             $(function () {
                 //Initialize Select2 Elements
