@@ -52,9 +52,6 @@
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <div class="text-center">
-                            <div style="margin-top: 4px"  id="message">
-                                <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                            </div>
                         </div>
                         <table class="table table-bordered table-striped" id="mytable">
                             <thead>
@@ -70,11 +67,21 @@
                                     <th>Kota Penerima</th>
                                     <th>Kode Pos Penerima</th>
                                     <th>Telpon Penerima</th>
+                                    <th>Status</th>
                                     <th width="200px">Action</th>
                                 </tr>
                             </thead>
                         
                         </table>
+
+                        <div style="margin-top: 4px"  id="message">
+                            <?php if($this->session->userdata('message') <> ''){ ?>
+                                <div class="alert alert-success" role="alert">
+                                    <?php echo $this->session->userdata('message'); ?>
+                                </div>
+                            <?php } ?>
+                            
+                            </div>
                         
                         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script>
                         <script type="text/javascript">
@@ -113,7 +120,7 @@
                                         {
                                             "data": "c_id",
                                             "orderable": false
-                                        },{"data": "c_name_sender"},{"data": "c_address_sender"},{"data": "c_city_sender"},{"data": "c_postcode_sender"},{"data": "c_phone_sender"},{"data": "c_name_receiver"},{"data": "c_address_receiver"},{"data": "c_city_receiver"},{"data": "c_postcode_receiver"},{"data": "c_phone_receiver"},
+                                        },{"data": "c_name_sender"},{"data": "c_address_sender"},{"data": "c_city_sender"},{"data": "c_postcode_sender"},{"data": "c_phone_sender"},{"data": "c_name_receiver"},{"data": "c_address_receiver"},{"data": "c_city_receiver"},{"data": "c_postcode_receiver"},{"data": "c_phone_receiver"},{"data": "s_name"},
                                         {
                                             "data" : "action",
                                             "orderable": false,

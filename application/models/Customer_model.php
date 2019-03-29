@@ -17,12 +17,14 @@ class Customer_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price ');
+        $this->datatables->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
         $this->datatables->from('customer');
         //add this line for join
         $this->datatables->join('transaction', 'customer.c_id = transaction.c_id');
         $this->datatables->join('desc_transaction', 'transaction.dt_id = desc_transaction.dt_id');
-        $this->datatables->add_column('action', anchor(site_url('customer/read/$1'),'Read')." | ".anchor(site_url('customer/update/$1'),'Update')." | ".anchor(site_url('customer/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'c_id');
+        $this->datatables->join('packing', 'desc_transaction.dt_packing = packing.pk_id');
+        $this->datatables->join('status', 'transaction.t_status  = status.s_id');
+        $this->datatables->add_column('action', anchor(site_url('customer/read/$1'),'Read',array('target' => '_blank'))." | ".anchor(site_url('customer/update/$1'),'Update')." | ".anchor(site_url('customer/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'c_id');
         return $this->datatables->generate();
     }
 
@@ -36,8 +38,15 @@ class Customer_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
+        $this->db->from($this->table);
+        //add this line for join
+        $this->db->join('transaction', 'customer.c_id = transaction.c_id');
+        $this->db->join('desc_transaction', 'transaction.dt_id = desc_transaction.dt_id');
+        $this->db->join('packing', 'desc_transaction.dt_packing = packing.pk_id');
+        $this->db->join('status', 'transaction.t_status  = status.s_id');
+        $this->db->where('customer.'.$this->id, $id);
+        return $this->db->get()->row();
     }
     
     // get total rows
