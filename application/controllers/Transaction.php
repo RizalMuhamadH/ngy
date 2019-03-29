@@ -10,7 +10,11 @@ class Transaction extends CI_Controller
         parent::__construct();
         $this->load->model('Transaction_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		}
     }
 
     public function index()

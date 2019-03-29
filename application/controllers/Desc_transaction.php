@@ -10,7 +10,11 @@ class Desc_transaction extends CI_Controller
         parent::__construct();
         $this->load->model('Desc_transaction_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		}
     }
 
     public function index()

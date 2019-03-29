@@ -17,6 +17,10 @@ class Customer extends CI_Controller
         $this->load->library('form_validation');        
         $this->load->library('datatables');
         $this->load->helper('string');
+
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		}
     }
 
     public function index()
@@ -34,6 +38,23 @@ class Customer extends CI_Controller
     {
         $row = $this->Customer_model->get_by_id($id);
         if ($row) {
+            $tmp = '';
+            $items = '';
+            $product = count($this->Product_model->get_products());
+            $p = $this->Product_model->get_products();
+            
+            for($i = 0; $i < $product; $i++){
+                $b = explode(',',$row->dt_list_products);
+                foreach($b as $item){
+                    $tmp = $item;
+                    if($tmp == $p[$i]['p_id']){
+                        $items = $items.$p[$i]['p_name'].",";
+                        break;
+                    }
+                }
+            }
+
+
             $data = array(
 		'c_id' => $row->c_id,
 		'c_name_sender' => $row->c_name_sender,
@@ -45,7 +66,23 @@ class Customer extends CI_Controller
 		'c_address_receiver' => $row->c_address_receiver,
 		'c_city_receiver' => $row->c_city_receiver,
 		'c_postcode_receiver' => $row->c_postcode_receiver,
-		'c_phone_receiver' => $row->c_phone_receiver,
+        'c_phone_receiver' => $row->c_phone_receiver,
+        'dt_list_products' => set_value('dt_list_products', $items),
+        'dt_total_items' => set_value('dt_total_items', $row->dt_total_items),
+		'dt_total_weight' => set_value('dt_total_weight', $row->dt_total_weight),
+	    'dt_total_price' => set_value('dt_total_price', $row->dt_total_price),
+		'dt_packing' => set_value('dt_packing', $row->dt_packing),
+		'dt_desc' => set_value('dt_desc', $row->dt_desc),
+		't_no_trans' => set_value('t_no_trans', $row->t_no_trans),
+		't_date_delivery' => set_value('t_date_delivery', $row->t_date_delivery),
+		't_date_reception' => set_value('t_date_reception', $row->t_date_reception),
+		't_status' => set_value('t_status', $row->t_status),
+		't_desc' => set_value('t_desc', $row->t_desc),
+	    'dt_id' => set_value('dt_id', $row->dt_id),
+	    't_id' => set_value('t_id', $row->t_id),
+	    'product' => $this->Product_model->get_products(),
+	    'packing' => $this->Packing_model->get_all(),
+	    'status' => $this->Status_model->get_all(),
 	    );
             $this->load->view('customer/customer_read', $data);
         } else {
@@ -80,6 +117,8 @@ class Customer extends CI_Controller
 	    't_date_reception' => set_value('t_date_reception'),
 	    't_status' => set_value('t_status'),
 	    't_desc' => set_value('t_desc'),
+	    'dt_id' => set_value('dt_id'),
+	    't_id' => set_value('t_id'),
 	    'product' => $this->Product_model->get_products(),
 	    'packing' => $this->Packing_model->get_all(),
 	    'status' => $this->Status_model->get_all(),
@@ -98,7 +137,7 @@ class Customer extends CI_Controller
             $product_tags = $this->input->post('product_tags');
             $pt = '';
             foreach ($product_tags as $product) {
-                $br = $br.$product.",";
+                $pt = $pt.$product.",";
                 
             }
 
@@ -165,7 +204,8 @@ class Customer extends CI_Controller
 		'c_address_receiver' => set_value('c_address_receiver', $row->c_address_receiver),
 		'c_city_receiver' => set_value('c_city_receiver', $row->c_city_receiver),
 		'c_postcode_receiver' => set_value('c_postcode_receiver', $row->c_postcode_receiver),
-		'c_phone_receiver' => set_value('c_phone_receiver', $row->c_phone_receiver),
+        'c_phone_receiver' => set_value('c_phone_receiver', $row->c_phone_receiver),
+        'dt_total_items' => set_value('dt_total_items', $row->dt_total_items),
 		'dt_list_products' => set_value('dt_list_products', $row->dt_list_products),
 		'dt_total_weight' => set_value('dt_total_weight', $row->dt_total_weight),
 	    'dt_total_price' => set_value('dt_total_price', $row->dt_total_price),
@@ -176,7 +216,11 @@ class Customer extends CI_Controller
 		't_date_reception' => set_value('t_date_reception', $row->t_date_reception),
 		't_status' => set_value('t_status', $row->t_status),
 		't_desc' => set_value('t_desc', $row->t_desc),
+	    'dt_id' => set_value('dt_id', $row->dt_id),
+	    't_id' => set_value('t_id', $row->t_id),
 	    'product' => $this->Product_model->get_products(),
+	    'packing' => $this->Packing_model->get_all(),
+	    'status' => $this->Status_model->get_all(),
         'page' => 'customer/customer_form',
 	    );
             $this->load->view('dashboard/dashboard', $data);
@@ -194,19 +238,53 @@ class Customer extends CI_Controller
             $this->update($this->input->post('c_id', TRUE));
         } else {
             $data = array(
-		'c_name_sender' => $this->input->post('c_name_sender',TRUE),
-		'c_address_sender' => $this->input->post('c_address_sender',TRUE),
-		'c_city_sender' => $this->input->post('c_city_sender',TRUE),
-		'c_postcode_sender' => $this->input->post('c_postcode_sender',TRUE),
-		'c_phone_sender' => $this->input->post('c_phone_sender',TRUE),
-		'c_name_receiver' => $this->input->post('c_name_receiver',TRUE),
-		'c_address_receiver' => $this->input->post('c_address_receiver',TRUE),
-		'c_city_receiver' => $this->input->post('c_city_receiver',TRUE),
-		'c_postcode_receiver' => $this->input->post('c_postcode_receiver',TRUE),
-		'c_phone_receiver' => $this->input->post('c_phone_receiver',TRUE),
-	    );
+                'c_name_sender' => $this->input->post('c_name_sender',TRUE),
+                'c_address_sender' => $this->input->post('c_address_sender',TRUE),
+                'c_city_sender' => $this->input->post('c_city_sender',TRUE),
+                'c_postcode_sender' => $this->input->post('c_postcode_sender',TRUE),
+                'c_phone_sender' => $this->input->post('c_phone_sender',TRUE),
+                'c_name_receiver' => $this->input->post('c_name_receiver',TRUE),
+                'c_address_receiver' => $this->input->post('c_address_receiver',TRUE),
+                'c_city_receiver' => $this->input->post('c_city_receiver',TRUE),
+                'c_postcode_receiver' => $this->input->post('c_postcode_receiver',TRUE),
+                'c_phone_receiver' => $this->input->post('c_phone_receiver',TRUE),
+            );
 
             $this->Customer_model->update($this->input->post('c_id', TRUE), $data);
+
+            $product_tags = $this->input->post('product_tags');
+            $pt = '';
+            foreach ($product_tags as $product) {
+                $pt = $pt.$product.",";
+                
+            }
+
+            $desc_trans = array(
+                'dt_list_products' => $pt,
+                'dt_total_items' => sizeof($product_tags),
+                'dt_total_weight' => $pt,
+                'dt_total_weight' => $this->input->post('dt_total_weight'),
+                'dt_packing' => $this->input->post('dt_packing'),
+                'dt_total_price' => $this->input->post('dt_total_price'),
+                'dt_desc' => $this->input->post('dt_desc'),
+                // 'dt_date' => date("Y/m/d H:i:s"),
+            );
+
+            
+            $this->Desc_transaction_model->update($this->input->post('dt_id', TRUE), $desc_trans);
+
+            $trans = array(
+                // 't_no_trans' => $idCustomer.$idDescTrans.date("Y").date("m").date("d").strtoupper(random_string('alnum', 4)),
+                't_date_delivery' => $this->input->post('t_date_delivery'),
+                't_date_reception' => $this->input->post('t_date_reception'),
+                't_status' => $this->input->post('t_status'),
+                't_desc' => $this->input->post('t_desc'),
+                // 'dt_id ' => $idDescTrans,
+                // 'c_id ' => $idCustomer,
+            );
+
+            $this->Transaction_model->update($this->input->post('t_id', TRUE), $trans);
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('customer'));
         }

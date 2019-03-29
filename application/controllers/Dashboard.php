@@ -9,6 +9,10 @@ class Dashboard extends CI_Controller {
         $this->load->model('User_model');
         $this->load->library('form_validation');        
 		$this->load->library('datatables');
+
+		if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		}
     }
 
 	/**
