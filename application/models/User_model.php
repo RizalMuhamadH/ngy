@@ -82,6 +82,40 @@ class User_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    public function login($username, $password){
+        $pass = md5($password);
+			// $pass = $password;
+
+			// $this->db->where("status",'0');
+			$this->db->where("_username",$username);
+			$this->db->where("_password",$pass);
+			$query = $this->db->get("user");
+			
+			if($query->num_rows() > 0){
+				
+				foreach($query->result() as $row){
+					$user = array(
+						"logged" => TRUE,
+                        "session_username"	=> $row->_name,
+                        "privileges" => $row->_privileges
+					);
+					$this->session->set_userdata($user);
+					redirect('dashboard');
+				}
+			}
+			else 
+			{
+				// Jika username atau password tidak sama
+				$this->session->set_flashdata('result_login', '1');
+				redirect(base_url());
+			}
+    }
+
+    function logout(){
+        $this->session->sess_destroy();
+        // redirect(base_url('login'));
+    }
+
 }
 
 /* End of file User_model.php */

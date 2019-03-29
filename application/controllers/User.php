@@ -10,7 +10,11 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->model('User_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('datatables');
+        
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		}
     }
 
     public function index()
@@ -23,6 +27,19 @@ class User extends CI_Controller
     public function json() {
         header('Content-Type: application/json');
         echo $this->User_model->json();
+    }
+
+    public function login(){
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        
+        $this->User_model->login($username, $password);
+
+    }
+
+    public function logout(){
+        $this->User_model->logout();
+        redirect(base_url());
     }
 
     public function read($id) 
