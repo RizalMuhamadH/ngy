@@ -18,12 +18,12 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                User
+                Admin
                 <small><?php echo $button; ?></small>
                 </h1>
                 <ol class="breadcrumb">
                 <li><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li><a href="user">Users</a></li>
+                <li><a href="user">Admin</a></li>
                 <li class="active"><?php echo $button; ?></li>
                 <!--
                 <li><a href="#">Layout</a></li>

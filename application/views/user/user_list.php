@@ -25,12 +25,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Users
+                Admin
                 <small>Control Panel</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active">Users</li>
+                <li class="active">Admin</li>
             </ol>
         </section>
         <!-- Main content -->

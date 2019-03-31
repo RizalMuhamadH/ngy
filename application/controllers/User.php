@@ -12,21 +12,28 @@ class User extends CI_Controller
         $this->load->library('form_validation');        
         $this->load->library('datatables');
         
-        if ($this->session->userdata('logged') !=TRUE) {
-			redirect(base_url());
-		}
+        // if ($this->session->userdata('logged') !=TRUE) {
+		// 	redirect(base_url());
+		// }
     }
 
     public function index()
     {
-        
-        $data['page'] = 'user/user_list';
-        $this->load->view('dashboard/dashboard', $data);
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $data['page'] = 'user/user_list';
+            $this->load->view('dashboard/dashboard', $data);
+        }
     } 
     
     public function json() {
-        header('Content-Type: application/json');
-        echo $this->User_model->json();
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            header('Content-Type: application/json');
+            echo $this->User_model->json();
+        }
     }
 
     public function login(){
@@ -44,110 +51,134 @@ class User extends CI_Controller
 
     public function read($id) 
     {
-        $row = $this->User_model->get_by_id($id);
-        if ($row) {
-            $data = array(
-		'_id' => $row->_id,
-		'_username' => $row->_username,
-		'_password' => $row->_password,
-		'_name' => $row->_name,
-		'_previllage' => $row->_previllage,
-	    );
-            $this->load->view('user/user_read', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user'));
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $row = $this->User_model->get_by_id($id);
+            if ($row) {
+                $data = array(
+            '_id' => $row->_id,
+            '_username' => $row->_username,
+            '_password' => $row->_password,
+            '_name' => $row->_name,
+            '_previllage' => $row->_previllage,
+            );
+                $this->load->view('user/user_read', $data);
+            } else {
+                $this->session->set_flashdata('message', 'Record Not Found');
+                redirect(site_url('user'));
+            }
         }
     }
 
     public function create() 
     {
-        $data = array(
-            'button' => 'Create',
-            'action' => site_url('user/create_action'),
-	    '_id' => set_value('_id'),
-	    '_username' => set_value('_username'),
-	    '_password' => set_value('_password'),
-	    '_name' => set_value('_name'),
-	    '_previllage' => set_value('_previllage'),
-        'page' => 'user/user_form',
-	);
-        $this->load->view('dashboard/dashboard', $data);
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $data = array(
+                'button' => 'Create',
+                'action' => site_url('user/create_action'),
+            '_id' => set_value('_id'),
+            '_username' => set_value('_username'),
+            '_password' => set_value('_password'),
+            '_name' => set_value('_name'),
+            '_previllage' => set_value('_previllage'),
+            'page' => 'user/user_form',
+        );
+            $this->load->view('dashboard/dashboard', $data);
+        }
     }
     
     public function create_action() 
     {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-		'_username' => $this->input->post('_username',TRUE),
-		'_password' => md5($this->input->post('_password',TRUE)),
-		'_name' => $this->input->post('_name',TRUE),
-		'_previllage' => $this->input->post('_previllage',TRUE),
-	    );
-
-            $this->User_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('user'));
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $this->_rules();
+    
+            if ($this->form_validation->run() == FALSE) {
+                $this->create();
+            } else {
+                $data = array(
+            '_username' => $this->input->post('_username',TRUE),
+            '_password' => md5($this->input->post('_password',TRUE)),
+            '_name' => $this->input->post('_name',TRUE),
+            '_previllage' => $this->input->post('_previllage',TRUE),
+            );
+    
+                $this->User_model->insert($data);
+                $this->session->set_flashdata('message', 'Create Record Success');
+                redirect(site_url('user'));
+            }
         }
     }
     
     public function update($id) 
     {
-        $row = $this->User_model->get_by_id($id);
-
-        if ($row) {
-            $data = array(
-                'button' => 'Update',
-                'action' => site_url('user/update_action'),
-		'_id' => set_value('_id', $row->_id),
-		'_username' => set_value('_username', $row->_username),
-		'_password' => set_value('_password', $row->_password),
-		'_name' => set_value('_name', $row->_name),
-		'_previllage' => set_value('_previllage', $row->_previllage),
-        'page' => 'user/user_form',
-	    );
-            $this->load->view('dashboard/dashboard', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user'));
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $row = $this->User_model->get_by_id($id);
+    
+            if ($row) {
+                $data = array(
+                    'button' => 'Update',
+                    'action' => site_url('user/update_action'),
+            '_id' => set_value('_id', $row->_id),
+            '_username' => set_value('_username', $row->_username),
+            '_password' => set_value('_password', $row->_password),
+            '_name' => set_value('_name', $row->_name),
+            '_previllage' => set_value('_previllage', $row->_previllage),
+            'page' => 'user/user_form',
+            );
+                $this->load->view('dashboard/dashboard', $data);
+            } else {
+                $this->session->set_flashdata('message', 'Record Not Found');
+                redirect(site_url('user'));
+            }
         }
     }
     
     public function update_action() 
     {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('_id', TRUE));
-        } else {
-            $data = array(
-		'_username' => $this->input->post('_username',TRUE),
-		'_password' => $this->input->post('_password',TRUE),
-		'_name' => $this->input->post('_name',TRUE),
-		'_previllage' => $this->input->post('_previllage',TRUE),
-	    );
-
-            $this->User_model->update($this->input->post('_id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('user'));
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $this->_rules();
+    
+            if ($this->form_validation->run() == FALSE) {
+                $this->update($this->input->post('_id', TRUE));
+            } else {
+                $data = array(
+            '_username' => $this->input->post('_username',TRUE),
+            '_password' => $this->input->post('_password',TRUE),
+            '_name' => $this->input->post('_name',TRUE),
+            '_previllage' => $this->input->post('_previllage',TRUE),
+            );
+    
+                $this->User_model->update($this->input->post('_id', TRUE), $data);
+                $this->session->set_flashdata('message', 'Update Record Success');
+                redirect(site_url('user'));
+            }
         }
     }
     
     public function delete($id) 
     {
-        $row = $this->User_model->get_by_id($id);
-
-        if ($row) {
-            $this->User_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('user'));
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('user'));
+        if ($this->session->userdata('logged') !=TRUE) {
+			redirect(base_url());
+		} else {
+            $row = $this->User_model->get_by_id($id);
+    
+            if ($row) {
+                $this->User_model->delete($id);
+                $this->session->set_flashdata('message', 'Delete Record Success');
+                redirect(site_url('user'));
+            } else {
+                $this->session->set_flashdata('message', 'Record Not Found');
+                redirect(site_url('user'));
+            }
         }
     }
 

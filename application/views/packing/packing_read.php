@@ -12,7 +12,7 @@
     <body>
         <h2 style="margin-top:0px">Packing Read</h2>
         <table class="table">
-	    <tr><td>Pk Name</td><td><?php echo $pk_name; ?></td></tr>
+	    <tr><td>Jenis</td><td><?php echo $pk_name; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('packing') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

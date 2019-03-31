@@ -89,8 +89,8 @@ class User_model extends CI_Model
 			// $this->db->where("status",'0');
 			$this->db->where("_username",$username);
 			$this->db->where("_password",$pass);
-			$query = $this->db->get("user");
-			
+            $query = $this->db->get("user");
+            
 			if($query->num_rows() > 0){
 				
 				foreach($query->result() as $row){

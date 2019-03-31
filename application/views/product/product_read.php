@@ -12,8 +12,8 @@
     <body>
         <h2 style="margin-top:0px">Product Read</h2>
         <table class="table">
-	    <tr><td>P Name</td><td><?php echo $p_name; ?></td></tr>
-	    <tr><td>P Desc</td><td><?php echo $p_desc; ?></td></tr>
+	    <tr><td>Jenis</td><td><?php echo $p_name; ?></td></tr>
+	    <tr><td>Deskripsi</td><td><?php echo $p_desc; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('product') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

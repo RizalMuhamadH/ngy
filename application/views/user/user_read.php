@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">User Read</h2>
+        <h2 style="margin-top:0px">Admin Read</h2>
         <table class="table">
 	    <tr><td> Username</td><td><?php echo $_username; ?></td></tr>
 	    <tr><td> Password</td><td><?php echo $_password; ?></td></tr>

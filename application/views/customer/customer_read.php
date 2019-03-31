@@ -29,44 +29,23 @@
 		<table cellpadding="10">
 			<tbody>
 				<tr >
-					<td ><b>Pengirim</b></td>
-					<td >:</td>
-					<td style="width: 300px;"><?php echo $c_name_sender; ?></td>
-					<td><b>Penerima</b></td>
-					<td>:</td>
-					<td><?php echo $c_name_receiver; ?></td>
-				</tr>
-				<tr>
-					<td ><b>Alamat</b></td>
-					<td >:</td>
-					<td style="width: 300px;"><?php echo $c_address_sender; ?></td>
-					<td ><b>Alamat</b></td>
-					<td >:</td>
-					<td ><?php echo $c_address_receiver; ?></td>
-				</tr>
-				<tr >
-					<td ><b>Kota</b></td>
-					<td >:</td>
-					<td style="width: 300px;"><?php echo $c_city_sender; ?></td>
-					<td ><b>kota</b></td>
-					<td >:</td>
-					<td ><?php echo $c_city_receiver; ?></td>
-				</tr>
-				<tr >
-					<td ><b>Telepon</b></td>
-					<td >:</td>
-					<td style="width: 300px;"><?php echo $c_phone_sender; ?></td>
-					<td ><b>Telepon</b></td>
-					<td >:</td>
-					<td ><?php echo $c_phone_receiver; ?></td>
-				</tr>
-				<tr >
-					<td ><b>Kode Pos</b></td>
-					<td >:</td>
-					<td style="width: 300px;"><?php echo $c_postcode_sender; ?></td>
-					<td ><b>Kode Pos</b></td>
-					<td >:</td>
-					<td ><?php echo $c_postcode_receiver; ?></td>
+					<td style="width: 300px;">
+						<b>Pengirim </b>:<br>
+						<?php echo $c_name_sender; ?><br>
+						<?php echo $c_address_sender; ?><br>
+						<?php echo $c_city_sender; ?>
+						<?php echo " ".$c_postcode_sender; ?><br>
+						<?php echo "Tlpn.".$c_phone_sender; ?>
+					</td>
+					<td style="width: 300px;"></td>
+					<td style="width: 300px;">
+						<b>Penerima</b>:<br>
+						<?php echo $c_name_receiver; ?><br>
+						<?php echo $c_address_receiver; ?><br>
+						<?php echo $c_city_receiver; ?>
+						<?php echo " ".$c_postcode_receiver; ?><br>
+						<?php echo "Tlpn.".$c_phone_receiver; ?>
+					</td>
 				</tr>
 			</tbody>
 		</table>

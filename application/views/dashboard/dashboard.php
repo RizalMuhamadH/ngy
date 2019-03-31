@@ -84,7 +84,7 @@
 
             <li class="<?php if($page == 'user/user_list'){echo 'active';} ?>">
               <a href="<?php echo base_url('User') ?>">
-                <i class="fa fa-user"></i> <span>User</span>
+                <i class="fa fa-user"></i> <span>Admin</span>
               </a>
             </li> 
 
@@ -96,7 +96,7 @@
 
             <li class="<?php if($page == 'customer/customer_list'){echo 'active';} ?>">
               <a href="<?php echo base_url('customer') ?>">
-                <i class="fa fa-list-ol"></i> <span>Order</span>
+                <i class="fa fa-list-ol"></i> <span>Transaksi</span>
               </a>
             </li> 
 
@@ -111,38 +111,6 @@
                 <i class="fa fa-truck"></i> <span>Status</span>
               </a>
             </li> 
-
-            <!-- <li class="<?php if($page == 'photo/photo_list'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>Photo">
-                <i class="fa fa-file-image-o"></i> <span>Photo</span>
-              </a>
-            </li> 
-
-            <li class="<?php if($page == 'video/video_list'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>Video">
-                <i class="fa fa-file-video-o"></i> <span>Video</span>
-              </a>
-            </li> 
-
-            <li class="<?php if($page == 'post/post_list'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>post">
-                <i class="fa fa-camera-retro "></i> <span>Sharing Moment</span>
-              </a>
-            </li> 
-
-            <li class="<?php if($page == 'document/document_list'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>Document">
-                <i class="fa fa-file"></i> <span>Document</span>
-              </a>
-            </li>
-
-            <li class="<?php if($page == 'comment_post/comment_post_list'){echo 'active';} ?>">
-              <a href="<?php echo base_url(); ?>Comment_post">
-              <div id="messages"></div>
-              <p id="token"></p>
-                <i class="fa fa-comments-o"></i> <span>Comments</span>
-              </a>
-            </li> -->
 
           </ul>
         </section>

@@ -324,8 +324,8 @@ class Customer extends CI_Controller
     public function excel()
     {
         $this->load->helper('exportexcel');
-        $namaFile = "customer.xls";
-        $judul = "customer";
+        $namaFile = "Rekap Transaksi_".date("Y").date("m").date("d").".xls";
+        $judul = "Rekap Transaksi";
         $tablehead = 0;
         $tablebody = 1;
         $nourut = 1;
@@ -343,22 +343,47 @@ class Customer extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Name Sender");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Address Sender");
-	xlsWriteLabel($tablehead, $kolomhead++, "C City Sender");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Postcode Sender");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Phone Sender");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Name Receiver");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Address Receiver");
-	xlsWriteLabel($tablehead, $kolomhead++, "C City Receiver");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Postcode Receiver");
-	xlsWriteLabel($tablehead, $kolomhead++, "C Phone Receiver");
+        xlsWriteLabel($tablehead, $kolomhead++, "No.Transaksi");
+	xlsWriteLabel($tablehead, $kolomhead++, "Nama Pengirim");
+	xlsWriteLabel($tablehead, $kolomhead++, "Alamat Pengirim");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kota Pengirim");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kode pos Pengirim");
+	xlsWriteLabel($tablehead, $kolomhead++, "No.Telpon Pengirim");
+	xlsWriteLabel($tablehead, $kolomhead++, "Nama Penerima");
+	xlsWriteLabel($tablehead, $kolomhead++, "Alamat Penerima");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kota penerima");
+	xlsWriteLabel($tablehead, $kolomhead++, "Kode Pos Penerima");
+	xlsWriteLabel($tablehead, $kolomhead++, "No.Telepon Penerima");
+	xlsWriteLabel($tablehead, $kolomhead++, "Tanggal Pengiriman");
+	xlsWriteLabel($tablehead, $kolomhead++, "Tanggal Penerimaan");
+	xlsWriteLabel($tablehead, $kolomhead++, "Status");
+	xlsWriteLabel($tablehead, $kolomhead++, "Deskripsi Status");
+	xlsWriteLabel($tablehead, $kolomhead++, "Daftar Barang");
+	xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Barang");
+	xlsWriteLabel($tablehead, $kolomhead++, "Total Berat(kg)");
+	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Packing");
+    xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Biaya");
+    
+    $list = $this->Product_model->get_products();
 
 	foreach ($this->Customer_model->get_all() as $data) {
             $kolombody = 0;
+            $data_product = '';
+            $total = count($list);
+            for ($i=0; $i < $total ; $i++){
+                $p = explode(',', $data->dt_list_products);
+
+                foreach ($p as $product){
+                    if ($product == $list[$i]['p_id']) {
+                        $data_product = $data_product.$product.",";
+                        break;
+                    }
+                }
+            }
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
+            xlsWriteLabel($tablebody, $kolombody++, $data->t_no_trans);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->c_name_sender);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->c_address_sender);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->c_city_sender);
@@ -368,7 +393,18 @@ class Customer extends CI_Controller
 	    xlsWriteLabel($tablebody, $kolombody++, $data->c_address_receiver);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->c_city_receiver);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->c_postcode_receiver);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->c_phone_receiver);
+        xlsWriteLabel($tablebody, $kolombody++, $data->c_phone_receiver);
+        
+	    
+        xlsWriteLabel($tablebody, $kolombody++, $data->t_date_delivery);
+        xlsWriteLabel($tablebody, $kolombody++, $data->t_date_reception);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->s_name);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->t_desc);
+	    xlsWriteLabel($tablebody, $kolombody++, $data_product);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->dt_total_items);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->dt_total_weight);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->pk_name);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->dt_total_price);
 
 	    $tablebody++;
             $nourut++;
@@ -381,11 +417,11 @@ class Customer extends CI_Controller
     public function word()
     {
         header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=customer.doc");
+        header("Content-Disposition: attachment;Filename=Rekap Transaksi_".date("Y").date("m").date("d").".doc");
 
         $data = array(
             'customer_data' => $this->Customer_model->get_all(),
-            'start' => 0
+            'start' => 0, 'product' => $this->Product_model->get_products()
         );
         
         $this->load->view('customer/customer_doc',$data);

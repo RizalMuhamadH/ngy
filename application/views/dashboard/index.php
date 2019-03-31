@@ -21,7 +21,7 @@
               <div class="small-box bg-teal">
                 <div class="inner">
                   <h3><?php echo $count_user ?></h3>
-                  <p>User</p>
+                  <p>Admin</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-user"></i>
@@ -35,13 +35,13 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3><?php echo $count_article ?></h3>
-                  <p>News</p>
+                  <h3><?php echo $count_customer ?></h3>
+                  <p>transaksi</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-file-text-o"></i>
+                  <i class="fa fa-list-ol"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>News" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>Customer" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 
@@ -50,13 +50,13 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3><?php echo $count_news_cat ?></h3>
-                  <p>Category News</p>
+                  <h3><?php echo $count_packing ?></h3>
+                  <p>Jenis Packing</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-bookmark"></i>
+                  <i class="fa fa-suitcase"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>News_cat" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>Packing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 
@@ -65,13 +65,13 @@
               <!-- small box -->
               <div class="small-box bg-olive">
                 <div class="inner">
-                  <h3><?php echo $count_foto ?></h3>
-                  <p>Photo</p>
+                  <h3><?php echo $count_product ?></h3>
+                  <p>Jenis Barang</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-file-image-o"></i>
+                  <i class="fa fa-cubes"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>Photo" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>Product" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 
@@ -80,13 +80,13 @@
               <!-- small box -->
               <div class="small-box bg-olive">
                 <div class="inner">
-                  <h3><?php echo $count_video ?></h3>
-                  <p>Video</p>
+                  <h3><?php echo $count_status ?></h3>
+                  <p>Status</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-file-video-o"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>Video" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>Status" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 

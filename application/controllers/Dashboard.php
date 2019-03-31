@@ -7,6 +7,10 @@ class Dashboard extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('User_model');
+        $this->load->model('Customer_model');
+        $this->load->model('Packing_model');
+        $this->load->model('Product_model');
+        $this->load->model('Status_model');
         $this->load->library('form_validation');        
 		$this->load->library('datatables');
 
@@ -41,10 +45,10 @@ class Dashboard extends CI_Controller {
 		// $data['count_video'] = $this->Video_model->total_rows();
 
 		$data['count_user'] = $this->User_model->total_rows();
-		$data['count_article'] = 0;
-		$data['count_news_cat'] = 0;
-		$data['count_foto'] = 0;
-		$data['count_video'] = 0;
+		$data['count_customer'] = $this->Customer_model->total_rows();
+		$data['count_packing'] = $this->Packing_model->total_rows();
+		$data['count_product'] = $this->Product_model->total_rows();
+		$data['count_status'] = $this->Status_model->total_rows();
 	
 		$this->load->view('dashboard/dashboard', $data);
 	}
