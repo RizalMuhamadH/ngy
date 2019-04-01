@@ -50,46 +50,61 @@
                     <div class="box-body">
                         <!-- <h2 style="margin-top:0px">Users <?php echo $button ?></h2> -->
                         <form action="<?php echo $action; ?>" method="post">
-                            <div class="form-group">
-                                <label for="varchar">Nama Pengirim <?php echo form_error('c_name_sender') ?></label>
-                                <input type="text" class="form-control" name="c_name_sender" id="c_name_sender" placeholder="Nama" value="<?php echo $c_name_sender; ?>" />
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h3 class="panel-title"><b>Pengirim</b></h3></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="varchar">Nama Pengirim <?php echo form_error('c_name_sender') ?></label>
+                                    <input type="text" class="form-control" name="c_name_sender" id="c_name_sender" placeholder="Nama" value="<?php echo $c_name_sender; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="c_address_sender">Alamat Pengirim <?php echo form_error('c_address_sender') ?></label>
+                                    <textarea class="form-control" rows="3" name="c_address_sender" id="c_address_sender" placeholder="Alamat"><?php echo $c_address_sender; ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">Kota Pengirim <?php echo form_error('c_city_sender') ?></label>
+                                    <input type="text" class="form-control" name="c_city_sender" id="c_city_sender" placeholder="Kota" value="<?php echo $c_city_sender; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">Kode Pos Pengirim <?php echo form_error('c_postcode_sender') ?></label>
+                                    <input type="text" class="form-control" name="c_postcode_sender" id="c_postcode_sender" placeholder="Kode Pos" value="<?php echo $c_postcode_sender; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">No. Telepon Pengirim <?php echo form_error('c_phone_sender') ?></label>
+                                    <input type="text" class="form-control" name="c_phone_sender" id="c_phone_sender" placeholder="Telepon" value="<?php echo $c_phone_sender; ?>" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="c_address_sender">Alamat Pengirim <?php echo form_error('c_address_sender') ?></label>
-                                <textarea class="form-control" rows="3" name="c_address_sender" id="c_address_sender" placeholder="Alamat"><?php echo $c_address_sender; ?></textarea>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><b>Penerima</b></h3>
                             </div>
-                            <div class="form-group">
-                                <label for="varchar">Kota Pengirim <?php echo form_error('c_city_sender') ?></label>
-                                <input type="text" class="form-control" name="c_city_sender" id="c_city_sender" placeholder="Kota" value="<?php echo $c_city_sender; ?>" />
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="varchar">Nama Penerima <?php echo form_error('c_name_receiver') ?></label>
+                                    <input type="text" class="form-control" name="c_name_receiver" id="c_name_receiver" placeholder="Nama" value="<?php echo $c_name_receiver; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="c_address_receiver">Alamat penerima <?php echo form_error('c_address_receiver') ?></label>
+                                    <textarea class="form-control" rows="3" name="c_address_receiver" id="c_address_receiver" placeholder="Alamat"><?php echo $c_address_receiver; ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">Kota Penerima <?php echo form_error('c_city_receiver') ?></label>
+                                    <input type="text" class="form-control" name="c_city_receiver" id="c_city_receiver" placeholder="Kota" value="<?php echo $c_city_receiver; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">Kode Pos Penerima <?php echo form_error('c_postcode_receiver') ?></label>
+                                    <input type="text" class="form-control" name="c_postcode_receiver" id="c_postcode_receiver" placeholder="Kode Pos" value="<?php echo $c_postcode_receiver; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="varchar">No. Telepon Penerima <?php echo form_error('c_phone_receiver') ?></label>
+                                    <input type="text" class="form-control" name="c_phone_receiver" id="c_phone_receiver" placeholder="Telepon" value="<?php echo $c_phone_receiver; ?>" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="varchar">Kode Pos Pengirim <?php echo form_error('c_postcode_sender') ?></label>
-                                <input type="text" class="form-control" name="c_postcode_sender" id="c_postcode_sender" placeholder="Kode Pos" value="<?php echo $c_postcode_sender; ?>" />
-                            </div>
-                            <div class="form-group">
-                                <label for="varchar">No. Telepon Pengirim <?php echo form_error('c_phone_sender') ?></label>
-                                <input type="text" class="form-control" name="c_phone_sender" id="c_phone_sender" placeholder="Telepon" value="<?php echo $c_phone_sender; ?>" />
-                            </div>
-                            <div class="form-group">
-                                <label for="varchar">Nama Penerima <?php echo form_error('c_name_receiver') ?></label>
-                                <input type="text" class="form-control" name="c_name_receiver" id="c_name_receiver" placeholder="Nama" value="<?php echo $c_name_receiver; ?>" />
-                            </div>
-                            <div class="form-group">
-                                <label for="c_address_receiver">Alamat penerima <?php echo form_error('c_address_receiver') ?></label>
-                                <textarea class="form-control" rows="3" name="c_address_receiver" id="c_address_receiver" placeholder="Alamat"><?php echo $c_address_receiver; ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="varchar">Kota Penerima <?php echo form_error('c_city_receiver') ?></label>
-                                <input type="text" class="form-control" name="c_city_receiver" id="c_city_receiver" placeholder="Kota" value="<?php echo $c_city_receiver; ?>" />
-                            </div>
-                            <div class="form-group">
-                                <label for="varchar">Kode Pos Penerima <?php echo form_error('c_postcode_receiver') ?></label>
-                                <input type="text" class="form-control" name="c_postcode_receiver" id="c_postcode_receiver" placeholder="Kode Pos" value="<?php echo $c_postcode_receiver; ?>" />
-                            </div>
-                            <div class="form-group">
-                                <label for="varchar">No. Telepon Penerima <?php echo form_error('c_phone_receiver') ?></label>
-                                <input type="text" class="form-control" name="c_phone_receiver" id="c_phone_receiver" placeholder="Telepon" value="<?php echo $c_phone_receiver; ?>" />
-                            </div>
+                        </div>
+                            
                             <div class="form-group">
                                 <label for="varchar">Barang</label>
                                 <select multiple class="form-control select2" name="product_tags[]" multiple="multiple" data-placeholder="Select a State" id="p_list_products">
