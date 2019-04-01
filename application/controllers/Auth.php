@@ -4,7 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Auth extends CI_Controller {
 
 	public function index(){
-		$this->load->view('login');
+		if ($this->session->userdata('logged') !=TRUE) {
+			$this->load->view('login');
+		} else {
+			redirect('dashboard');
+		}
 	}
         
 	public function login(){

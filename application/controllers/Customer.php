@@ -18,6 +18,8 @@ class Customer extends CI_Controller
         $this->load->library('datatables');
         $this->load->helper('string');
 
+        $this->load->library('ciqrcode');
+
         if ($this->session->userdata('logged') !=TRUE) {
 			redirect(base_url());
 		}
@@ -36,7 +38,6 @@ class Customer extends CI_Controller
 
     public function read($id) 
     {
-        $this->load->library('ciqrcode');
 
         $row = $this->Customer_model->get_by_id($id);
         if ($row) {
@@ -55,25 +56,6 @@ class Customer extends CI_Controller
                     }
                 }
             }
-
-
-            $config['cacheable']    = true; //boolean, the default is true
-            $config['cachedir']     = '/assets/'; //string, the default is application/cache/
-            $config['errorlog']     = '/assets/'; //string, the default is application/logs/
-            $config['imagedir']     = '/assets/images/'; //direktori penyimpanan qr code
-            $config['quality']      = true; //boolean, the default is true
-            $config['size']         = '1024'; //interger, the default is 1024
-            $config['black']        = array(224,255,255); // array, default is array(255,255,255)
-            $config['white']        = array(70,130,180); // array, default is array(0,0,0)
-            $this->ciqrcode->initialize($config);
-
-            $image_name=$row->t_no_trans.'.png'; //buat name dari qr code sesuai dengan nim
-    
-            $params['data'] = $row->t_no_trans; //data yang akan di jadikan QR CODE
-            $params['level'] = 'H'; //H=High
-            $params['size'] = 10;
-            $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
-            $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
 
 
             $data = array(
@@ -155,6 +137,7 @@ class Customer extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+
             $product_tags = $this->input->post('product_tags');
             $pt = '';
             foreach ($product_tags as $product) {
@@ -190,8 +173,9 @@ class Customer extends CI_Controller
 
             $idDescTrans = $this->Desc_transaction_model->insert($desc_trans);
 
+            $noTrans = $idCustomer.$idDescTrans.date("Y").date("m").date("d").strtoupper(random_string('alnum', 4));
             $trans = array(
-                't_no_trans' => $idCustomer.$idDescTrans.date("Y").date("m").date("d").strtoupper(random_string('alnum', 4)),
+                't_no_trans' => $noTrans,
                 't_date_delivery' => $this->input->post('t_date_delivery'),
                 't_date_reception' => $this->input->post('t_date_reception'),
                 't_status' => $this->input->post('t_status'),
@@ -199,6 +183,24 @@ class Customer extends CI_Controller
                 'dt_id ' => $idDescTrans,
                 'c_id ' => $idCustomer,
             );
+
+            $config['cacheable']    = true; //boolean, the default is true
+            $config['cachedir']     = '/assets/'; //string, the default is application/cache/
+            $config['errorlog']     = '/assets/'; //string, the default is application/logs/
+            $config['imagedir']     = '/assets/images/'; //direktori penyimpanan qr code
+            $config['quality']      = true; //boolean, the default is true
+            $config['size']         = '1024'; //interger, the default is 1024
+            $config['black']        = array(224,255,255); // array, default is array(255,255,255)
+            $config['white']        = array(70,130,180); // array, default is array(0,0,0)
+            $this->ciqrcode->initialize($config);
+
+            $image_name=$noTrans.'.png'; //buat name dari qr code sesuai dengan nim
+    
+            $params['data'] = $noTrans; //data yang akan di jadikan QR CODE
+            $params['level'] = 'H'; //H=High
+            $params['size'] = 10;
+            $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
+            $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
 
             $this->Transaction_model->insert($trans);
 
