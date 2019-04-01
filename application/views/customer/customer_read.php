@@ -26,6 +26,7 @@
 	</table> -->
 	<div id="printerwrapper">
 		<h2><?php echo $t_no_trans; ?></h2>
+		<img style="width: 100px;" src="<?php echo base_url().'assets/images/'.$t_no_trans;?>.png">
 		<table cellpadding="10">
 			<tbody>
 				<tr >
