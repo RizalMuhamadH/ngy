@@ -163,7 +163,7 @@ class Customer extends CI_Controller
             $desc_trans = array(
                 'dt_list_products' => $pt,
                 'dt_total_items' => sizeof($product_tags),
-                'dt_total_weight' => $pt,
+                // 'dt_total_weight' => $pt,
                 'dt_total_weight' => $this->input->post('dt_total_weight'),
                 'dt_packing' => $this->input->post('dt_packing'),
                 'dt_total_price' => $this->input->post('dt_total_price'),
