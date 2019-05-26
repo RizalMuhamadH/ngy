@@ -35,6 +35,7 @@ class Packing extends CI_Controller
             $data = array(
 		'pk_id' => $row->pk_id,
 		'pk_name' => $row->pk_name,
+		'pk_cost' => $row->pk_cost,
 	    );
             $this->load->view('packing/packing_read', $data);
         } else {
@@ -50,6 +51,7 @@ class Packing extends CI_Controller
             'action' => site_url('packing/create_action'),
 	    'pk_id' => set_value('pk_id'),
 	    'pk_name' => set_value('pk_name'),
+	    'pk_cost' => set_value('pk_cost'),
         'page' => 'packing/packing_form',
 	);
         $this->load->view('dashboard/dashboard', $data);
@@ -64,6 +66,7 @@ class Packing extends CI_Controller
         } else {
             $data = array(
 		'pk_name' => $this->input->post('pk_name',TRUE),
+		'pk_cost' => $this->input->post('pk_cost',TRUE),
 	    );
 
             $this->Packing_model->insert($data);
@@ -82,6 +85,7 @@ class Packing extends CI_Controller
                 'action' => site_url('packing/update_action'),
 		'pk_id' => set_value('pk_id', $row->pk_id),
 		'pk_name' => set_value('pk_name', $row->pk_name),
+		'pk_cost' => set_value('pk_cost', $row->pk_cost),
         'page' => 'packing/packing_form',
 	    );
             $this->load->view('dashboard/dashboard', $data);
@@ -100,6 +104,7 @@ class Packing extends CI_Controller
         } else {
             $data = array(
 		'pk_name' => $this->input->post('pk_name',TRUE),
+		'pk_cost' => $this->input->post('pk_cost',TRUE),
 	    );
 
             $this->Packing_model->update($this->input->post('pk_id', TRUE), $data);
@@ -152,7 +157,8 @@ class Packing extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Pk Name");
+	xlsWriteLabel($tablehead, $kolomhead++, "Name");
+	xlsWriteLabel($tablehead, $kolomhead++, "Cost");
 
 	foreach ($this->Packing_model->get_all() as $data) {
             $kolombody = 0;

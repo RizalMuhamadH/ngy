@@ -17,7 +17,7 @@ class Customer_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
+        $this->datatables->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_province,desc_transaction.dt_additional_cost,desc_transaction.dt_total_weight,desc_transaction.dt_agent,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
         $this->datatables->from('customer');
         //add this line for join
         $this->datatables->join('transaction', 'customer.c_id = transaction.c_id');
@@ -31,7 +31,7 @@ class Customer_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
+        $this->db->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_agentdesc_transaction.dt_province,desc_transaction.dt_additional_cost,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
         $this->db->from('customer');
         //add this line for join
         $this->db->join('transaction', 'customer.c_id = transaction.c_id');
@@ -45,7 +45,7 @@ class Customer_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
+        $this->db->select('customer.c_id,customer.c_name_sender,customer.c_address_sender,customer.c_city_sender,customer.c_postcode_sender,customer.c_phone_sender,customer.c_name_receiver,customer.c_address_receiver,customer.c_city_receiver,customer.c_postcode_receiver,customer.c_phone_receiver,transaction.t_id,transaction.t_no_trans,transaction.t_date_delivery,transaction.t_date_reception,transaction.t_status,transaction.t_desc,desc_transaction.dt_id,desc_transaction.dt_province,desc_transaction.dt_additional_cost,desc_transaction.dt_agent,desc_transaction.dt_list_products,desc_transaction.dt_total_weight,desc_transaction.dt_total_items,desc_transaction.dt_packing,desc_transaction.dt_desc,desc_transaction.dt_total_price,packing.pk_id,packing.pk_name,status.s_id,status.s_name');
         $this->db->from($this->table);
         //add this line for join
         $this->db->join('transaction', 'customer.c_id = transaction.c_id');

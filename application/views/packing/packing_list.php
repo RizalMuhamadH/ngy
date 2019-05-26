@@ -58,6 +58,7 @@
                             <tr>
                                 <th width="80px">No</th>
                                 <th>Jenis</th>
+                                <th>Harga</th>
                                 <th width="200px">Action</th>
                             </tr>
                         </thead>
@@ -110,7 +111,7 @@
                                         {
                                             "data": "pk_id",
                                             "orderable": false
-                                        },{"data": "pk_name"},
+                                        },{"data": "pk_name"},{"data": "pk_cost"},
                                         {
                                             "data" : "action",
                                             "orderable": false,

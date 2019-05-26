@@ -17,7 +17,7 @@ class Packing_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('pk_id,pk_name');
+        $this->datatables->select('pk_id,pk_name, pk_cost');
         $this->datatables->from('packing');
         //add this line for join
         //$this->datatables->join('table2', 'packing.field = table2.field');

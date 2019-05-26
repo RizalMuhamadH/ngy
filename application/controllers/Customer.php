@@ -93,8 +93,11 @@ class Customer extends CI_Controller
         'dt_total_items' => set_value('dt_total_items', $row->dt_total_items),
 		'dt_total_weight' => set_value('dt_total_weight', $row->dt_total_weight),
 	    'dt_total_price' => set_value('dt_total_price', $row->dt_total_price),
+	    'dt_province' => set_value('dt_province', $row->dt_province),
+	    'dt_additional_cost' => set_value('dt_additional_cost', $row->dt_additional_cost),
 		'dt_packing' => set_value('dt_packing', $row->dt_packing),
 		'dt_desc' => set_value('dt_desc', $row->dt_desc),
+		'dt_agent' => set_value('dt_agent', $row->dt_agent),
 		't_no_trans' => set_value('t_no_trans', $row->t_no_trans),
 		't_date_delivery' => set_value('t_date_delivery', $row->t_date_delivery),
 		't_date_reception' => set_value('t_date_reception', $row->t_date_reception),
@@ -133,7 +136,10 @@ class Customer extends CI_Controller
 	    'dt_total_weight' => set_value('dt_total_weight'),
 	    'dt_total_price' => set_value('dt_total_price'),
 	    'dt_packing' => set_value('dt_packing'),
+	    'dt_province' => set_value('dt_province'),
+	    'dt_additional_cost' => set_value('dt_additional_cost'),
 	    'dt_desc' => set_value('dt_desc'),
+	    'dt_agent' => set_value('dt_agent'),
 	    't_no_trans' => set_value('t_no_trans'),
 	    't_date_delivery' => set_value('t_date_delivery'),
 	    't_date_reception' => set_value('t_date_reception'),
@@ -186,7 +192,10 @@ class Customer extends CI_Controller
                 'dt_total_weight' => $this->input->post('dt_total_weight'),
                 'dt_packing' => $this->input->post('dt_packing'),
                 'dt_total_price' => $this->input->post('dt_total_price'),
+                'dt_province' => $this->input->post('dt_province'),
+                'dt_additional_cost' => $this->input->post('dt_additional_cost'),
                 'dt_desc' => $this->input->post('dt_desc'),
+                'dt_agent' => $this->input->post('dt_agent'),
                 'dt_date' => date("Y/m/d H:i:s"),
             );
 
@@ -235,7 +244,10 @@ class Customer extends CI_Controller
 		'dt_total_weight' => set_value('dt_total_weight', $row->dt_total_weight),
 	    'dt_total_price' => set_value('dt_total_price', $row->dt_total_price),
 		'dt_packing' => set_value('dt_packing', $row->dt_packing),
+	    'dt_province' => set_value('dt_province', $row->dt_province),
+	    'dt_additional_cost' => set_value('dt_additional_cost', $row->dt_additional_cost),
 		'dt_desc' => set_value('dt_desc', $row->dt_desc),
+		'dt_agent' => set_value('dt_agent', $row->dt_agent),
 		't_no_trans' => set_value('t_no_trans', $row->t_no_trans),
 		't_date_delivery' => set_value('t_date_delivery', $row->t_date_delivery),
 		't_date_reception' => set_value('t_date_reception', $row->t_date_reception),
@@ -290,9 +302,11 @@ class Customer extends CI_Controller
                 'dt_total_weight' => $pt,
                 'dt_total_weight' => $this->input->post('dt_total_weight'),
                 'dt_packing' => $this->input->post('dt_packing'),
+                'dt_province' => $this->input->post('dt_province'),
+                'dt_additional_cost' => $this->input->post('dt_additional_cost'),
                 'dt_total_price' => $this->input->post('dt_total_price'),
                 'dt_desc' => $this->input->post('dt_desc'),
-                // 'dt_date' => date("Y/m/d H:i:s"),
+                'dt_agent' => $this->input->post('dt_agent'),
             );
 
             
@@ -388,6 +402,7 @@ class Customer extends CI_Controller
 	xlsWriteLabel($tablehead, $kolomhead++, "Total Berat(kg)");
 	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Packing");
     xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Biaya");
+    xlsWriteLabel($tablehead, $kolomhead++, "Nama Agent");
     
     $list = $this->Product_model->get_products();
 
@@ -430,6 +445,7 @@ class Customer extends CI_Controller
 	    xlsWriteLabel($tablebody, $kolombody++, $data->dt_total_weight);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->pk_name);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->dt_total_price);
+	    xlsWriteLabel($tablebody, $kolombody++, $data->dt_agent);
 
 	    $tablebody++;
             $nourut++;

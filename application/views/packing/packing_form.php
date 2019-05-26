@@ -36,6 +36,10 @@
                             <label for="varchar">Nama Packing <?php echo form_error('pk_name') ?></label>
                             <input type="text" class="form-control" name="pk_name" id="pk_name" placeholder="Nama" value="<?php echo $pk_name; ?>" />
                         </div>
+                        <div class="form-group">
+                            <label for="varchar">Harga Packing <?php echo form_error('pk_cost') ?></label>
+                            <input type="text" class="form-control" name="pk_cost" id="pk_cost" placeholder="Harga" value="<?php echo $pk_cost; ?>" />
+                        </div>
                         <input type="hidden" name="pk_id" value="<?php echo $pk_id; ?>" /> 
                         <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
                         <a href="<?php echo site_url('packing') ?>" class="btn btn-default">Cancel</a>

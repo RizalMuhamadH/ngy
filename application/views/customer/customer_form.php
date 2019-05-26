@@ -104,6 +104,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                                    <label for="varchar">Nama Agen <?php echo form_error('dt_agent') ?></label>
+                                    <input type="text" class="form-control" name="dt_agent" id="dt_agent" placeholder="Telepon" value="<?php echo $dt_agent; ?>" />
+                                </div>
                             
                             <div class="form-group">
                                 <label for="varchar">Barang</label>
@@ -149,7 +154,7 @@
                                     <?php
                                         foreach ($packing as $p):
                                     ?>
-                                        <option value="<?php echo $p->pk_id;?>" <?php if($dt_packing==$p->pk_id) echo 'selected="selected"'; ?> ><?php echo $p->pk_name;?></option>
+                                        <option value="<?php echo $p->pk_id;?>" <?php if($dt_packing==$p->pk_id) echo 'selected="selected"'; ?> ><?php echo $p->pk_name;?> - <?php echo $p->pk_cost;?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -175,6 +180,17 @@
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="int"> Daerah</label>
+                                <select class="form-control" name="dt_province" id="dt_province">
+                                    <option value="Jawa" <?php if($dt_province == "Jawa" ) echo 'selected="selected"'; ?>> Jawa </option>
+                                    <option value="Luar Jawa" <?php if($dt_province == "Luar Jawa" ) echo 'selected="selected"'; ?>> Luar Jawa </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="varchar">Biaya Tambahan </label>
+                                <input type="text" class="form-control" name="dt_additional_cost" id="dt_additional_cost" placeholder="Harga" value="<?php echo $dt_additional_cost; ?>" />
                             </div>
                             <div class="form-group">
                                 <label for="varchar">Total Harga </label>
